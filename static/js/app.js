@@ -1,7 +1,7 @@
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json"
 const dataPromise = d3.json(url);
 
-// If a new sample is selected just call the barChart method with the new value
+// If a new sample is selected just call the charts method with the new value
 function optionChanged(newSample)
 {
     charts(newSample);
@@ -21,10 +21,11 @@ function charts(sample)
         // Store the data that matches the selected sample
         let selectedSample = findSample[0];
         let selectedMeta = findMeta[0];
-        // Get the top 10 otu_id, labels, and sample values
+        // Get the top 10 otu_id, labels, and sample values for the bar chart
         let top10_otu_ids = selectedSample.otu_ids.slice(0,10).reverse();
         let top10_otu_labels = selectedSample.otu_labels.slice(0,10).reverse();
         let top10_sample_values = selectedSample.sample_values.slice(0,10).reverse();
+        // these are for the bubble chart
         let otu_ids = selectedSample.otu_ids;
         let otu_labels = selectedSample.otu_labels;
         let sample_values = selectedSample.sample_values;
@@ -59,12 +60,13 @@ function charts(sample)
             {
                 size:sample_values,
                 color:otu_ids,
-                colorscale: "Rainbow"
+                colorscale: "Earth"
             }
         };
 
         let barData = [barTrace];
         let bubbleData = [bubbleTrace];
+        // This is ugly and I have no idea how to get the needle to point to the value.
         let gaugeData = [
             {
               domain: { x: [0, 1], y: [0, 1] },
@@ -92,6 +94,7 @@ function charts(sample)
               }
             }
           ];
+        // setup the layouts for each of the charts
         let barLayout =
         {
             title: `Top 10 OTUs found in subject ${sample}`
@@ -99,7 +102,8 @@ function charts(sample)
 
         let bubbleLayout = 
         {
-            title: `Bubble chart for ${sample}`
+            title: `Bubble chart for ${sample}`,
+            margin:{ t:30}
         };
         let gaugeLayout ={ width: 600, height: 400 };
         // Plot the chart
@@ -109,19 +113,6 @@ function charts(sample)
     });
 }
 
-/*function setMetaData(sample)
-{
-    panel = d3.select('#sample-metadata')
-    d3.json(url).then(function(data)
-    {
-        let metaData = data.metadata;
-        metaData.forEach(function(sample)
-        {
-            panel.append("row")
-        })
-
-    });
-}*/
 // function to setup the website so it's not blank
 function setup()
 {
@@ -143,32 +134,4 @@ function setup()
 
 
 setup();
-/*
-d3.json(url).then(function(data) 
-{
-    console.log(data);
 
-    let names = data.names;
-    let samples = data.samples;
-    let metadata = data.metadata;
-
-    let trace1 = 
-    {
-        x:samples.map(item => item.sample_values),
-        y:samples.map(item => item.otu_ids),
-        type:"bar",
-        orientation:"h"
-    };
-
-    let traceData = [trace1];
-
-    let layout =
-    {
-        title:"test"
-    };
-
-    Plotly.newPlot("bar",traceData,layout);
-
-
-});
-*/
