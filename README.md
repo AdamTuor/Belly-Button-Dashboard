@@ -1,7 +1,7 @@
 # belly-button-challenge
 
 ## Overview
-This project features an interactive dashboard using belly button biodiversity data from [this data](https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json). The data can be viewed in 3 different visualizations.
+This project features an interactive dashboard using belly button biodiversity data from [this source](https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json). The data can be viewed in 3 different visualizations.
 
 ### Bar Chart
 The bar chart is a quick glance at the top 10 OTUs present in the selected subject.  Visitors are able to hover over each bar to view the corresponding OTU label  This was achieved through filtering, slicing, and reversing the order of the data.
